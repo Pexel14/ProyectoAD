@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ProyectoAD</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="m_s_opciones">MÁS OPCIONES</string>
+    <string name="introduce_tu_nombre">Introduce tu nombre</string>
+    <string name="introduce_tu_contrase_a">Introduce tu contraseña</string>
+    <string name="iniciar_sesi_n">Iniciar Sesión</string>
+    <string name="no_tienes_una_cuenta_n_registrate">¿No tienes una cuenta? \n Registrate</string>
+    <string name="volver_al_inicio_de_sesi_n">Volver al inicio de sesión</string>
+    <string name="introduce_tu_correo">Introduce tu Correo</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="bienvenido_a_alertly">Bienvenido a Alertly</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="a_adir_incidencia">Añadir Incidencia</string>
+</resources>
