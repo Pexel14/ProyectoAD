@@ -1,4 +1,4 @@
-package com.example.proyectoad.ui.home;
+package com.example.proyectoad.home.view;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
