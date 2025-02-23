@@ -7,19 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.proyectoad.home.view.HomeFragment"
+        android:name="com.example.proyectoad.ui.inicio.InicioFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home"/>
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.proyectoad.IncidenciasAdd.IncidenciasFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_incidencias_add"/>
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.proyectoad.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications"/>
+        tools:layout="@layout/fragment_inicio"/>
     <fragment
         android:id="@+id/detail_Incidencia_Fragment"
         android:name="com.example.proyectoad.home.view.Detail_Incidencia_Fragment"

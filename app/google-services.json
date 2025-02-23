@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "114242175846",
+    "firebase_url": "https://proyectoad-69e1d-default-rtdb.firebaseio.com",
+    "project_id": "proyectoad-69e1d",
+    "storage_bucket": "proyectoad-69e1d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114242175846:android:42c2b86ad118bcc418fea7",
+        "android_client_info": {
+          "package_name": "com.example.proyectoad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114242175846-p874hoe0jmeeu5evo9bhlaa2idt621d9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.proyectoad",
+            "certificate_hash": "dfbcf408869d34d7d1e377cbfa81cbf8076988ef"
+          }
+        },
+        {
+          "client_id": "114242175846-irsqsvvrkrnj97sf5nt2mso1oive23r2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWoEofW3zm0w7hGxd6_kb41LUD8ZA6WxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114242175846-irsqsvvrkrnj97sf5nt2mso1oive23r2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

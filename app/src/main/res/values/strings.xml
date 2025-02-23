@@ -15,6 +15,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="a_adir_incidencia">Añadir Incidencia</string>
+    <string name="default_web_client_id">114242175846-irsqsvvrkrnj97sf5nt2mso1oive23r2.apps.googleusercontent.com</string>
+    <string name="confirma_la_contrasenia">Confirma la contraseña</string>
+    <string name="registro_error_registro">Error al realizar el registro</string>
     <string name="titulo">Titulo</string>
     <string name="escribe_un_t_tulo_para_la_incidencia">Escribe un título para la incidencia</string>
     <string name="descripci_n">Descripción</string>
