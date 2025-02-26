@@ -40,7 +40,7 @@ public class FormUserActivity extends AppCompatActivity {
                     Toast.makeText(FormUserActivity.this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
                 } else {
 
-
+                    // TODO insertar los datos de usuario en su nodo
 
 
 
