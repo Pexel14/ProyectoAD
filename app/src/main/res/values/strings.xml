@@ -30,4 +30,5 @@
     <string name="piso_y_letra">Piso y letra</string>
     <string name="introduce_tus_apellidos">Introduce tus apellidos</string>
     <string name="apellidos">Apellidos</string>
+    <string name="ya_casi_estas_rellena_el_formulario_de_registro_n_para_entrar_a_la_app">Ya casi estas, rellena el formulario de registro \n para entrar a la App</string>
 </resources>

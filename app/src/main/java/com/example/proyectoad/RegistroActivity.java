@@ -39,7 +39,6 @@ public class RegistroActivity extends AppCompatActivity {
                 String contrasenia = binding.etPassword.getText().toString().trim();
                 String confirmPassword = binding.etPassword2.getText().toString().trim();
 
-
                 if (username.isEmpty() || email.isEmpty() || contrasenia.isEmpty() || confirmPassword.isEmpty()) {
                     Toast.makeText(RegistroActivity.this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
                 } else if (!contrasenia.equals(confirmPassword)) {

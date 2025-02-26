@@ -8,17 +8,43 @@
     tools:context=".FormUserActivity"
     android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/ivLogoApp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo_app"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvMensajeAnimo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/ya_casi_estas_rellena_el_formulario_de_registro_n_para_entrar_a_la_app"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogoApp" />
+
     <TextView
         android:id="@+id/tvNombre"
         android:layout_width="wrap_content"
+        android:layout_marginTop="25dp"
         android:layout_height="wrap_content"
         android:text="@string/nombre"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMensajeAnimo" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilNombre"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:hint="@string/introduce_tu_nombre"
         app:endIconMode="clear_text"
@@ -108,7 +134,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnGoogle"
+        android:id="@+id/btnGuardarForm"
+        android:layout_marginTop="35dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/guardar_datos"

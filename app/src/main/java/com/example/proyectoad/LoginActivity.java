@@ -213,7 +213,6 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("usuario", idUsuario);
         editor.apply();
 
-
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         finish();
