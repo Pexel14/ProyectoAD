@@ -59,7 +59,6 @@ public class RegistroActivity extends AppCompatActivity {
                                     if (firebaseUser != null) {
                                         String userId = firebaseUser.getUid();
                                         guardarUsuarioEnDatabase(username, email, contrasenia);
-                                        // TODO
 
                                         Intent intent = new Intent(RegistroActivity.this, FormUserActivity.class);
                                         intent.putExtra("id", email);

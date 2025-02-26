@@ -26,14 +26,6 @@ public class User {
         this.es_admin = false;
     }
 
-    // Contructor necesario solo para los datos del formulario
-    public User(String nombre, String apellidos, String piso, String telefono){
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.piso_letra = piso;
-        this.telefono = telefono;
-    }
-
     public User(String nombre, String apellidos, String correo, String contrasenia, String incidencias, String telefono, String piso_letra, String foto_perfil, boolean es_admin) {
         this.nombre = nombre;
         this.apellidos = apellidos;
