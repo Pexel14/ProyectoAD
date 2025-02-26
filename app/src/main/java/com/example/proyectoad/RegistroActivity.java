@@ -11,6 +11,7 @@ import com.example.proyectoad.databinding.ActivityRegitroBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegistroActivity extends AppCompatActivity {
 
@@ -22,6 +23,9 @@ public class RegistroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mAuth = FirebaseAuth.getInstance();
+        ref = FirebaseDatabase.getInstance().getReference("usuarios");
 
         binding = ActivityRegitroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -55,6 +59,13 @@ public class RegistroActivity extends AppCompatActivity {
                                     if (firebaseUser != null) {
                                         String userId = firebaseUser.getUid();
                                         guardarUsuarioEnDatabase(username, email, contrasenia);
+                                        // TODO
+
+                                        Intent intent = new Intent(RegistroActivity.this, FormUserActivity.class);
+                                        intent.putExtra("id", email);
+                                        startActivity(intent);
+                                        finish();
+
                                     }
                                 } else {
                                     Toast.makeText(RegistroActivity.this, getString(R.string.registro_error_registro) + task.getException().getMessage(), Toast.LENGTH_LONG).show();
