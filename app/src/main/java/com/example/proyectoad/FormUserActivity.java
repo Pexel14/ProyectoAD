@@ -1,5 +1,6 @@
 package com.example.proyectoad;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -65,9 +66,9 @@ public class FormUserActivity extends AppCompatActivity {
                             binding.etPiso.setText("");
                             binding.etTelefono.setText("");
 
-                            /*Intent intent = new Intent(FormUserActivity.this, MainActivity.class);
+                            Intent intent = new Intent(FormUserActivity.this, MainActivity.class);
                             startActivity(intent);
-                            finish(); */
+                            finish();
 
                         } else {
                             Toast.makeText(FormUserActivity.this, "Error inesperado al registrar", Toast.LENGTH_SHORT).show();
