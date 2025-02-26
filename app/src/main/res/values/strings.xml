@@ -22,4 +22,12 @@
     <string name="escribe_un_t_tulo_para_la_incidencia">Escribe un título para la incidencia</string>
     <string name="descripci_n">Descripción</string>
     <string name="guardar">Guardar</string>
+    <string name="nombre">Nombre</string>
+    <string name="guardar_datos">Guardar datos</string>
+    <string name="introduce_n_mero_de_tel_fono">Introduce número de teléfono</string>
+    <string name="n_mero_de_tel_fono">Número de teléfono</string>
+    <string name="introduce_piso_y_letra">Introduce piso y letra</string>
+    <string name="piso_y_letra">Piso y letra</string>
+    <string name="introduce_tus_apellidos">Introduce tus apellidos</string>
+    <string name="apellidos">Apellidos</string>
 </resources>
