@@ -12,6 +12,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.proyectoad.databinding.ActivityFormUserBinding;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class FormUserActivity extends AppCompatActivity {
 
@@ -41,7 +45,34 @@ public class FormUserActivity extends AppCompatActivity {
                 } else {
 
                     // TODO insertar los datos de usuario en su nodo
+                    ref = FirebaseDatabase.getInstance().getReference("usuarios");
 
+                    String id = getIntent().getStringExtra("id").split("@")[0].replace(".", "");
+
+                    Map<String, Object> updates = new HashMap<>();
+                    updates.put("nombre", nombre);
+                    updates.put("apellidos", apellidos);
+                    updates.put("piso", piso);
+                    updates.put("telefono", telefono);
+
+                    // XXX PROBLEMA EN LA IMAGEN
+
+                    ref.child(id).updateChildren(updates).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(FormUserActivity.this, "Formulario guardado correctamente", Toast.LENGTH_SHORT).show();
+                            binding.etNombre.setText("");
+                            binding.etApellido.setText("");
+                            binding.etPiso.setText("");
+                            binding.etTelefono.setText("");
+
+                            /*Intent intent = new Intent(FormUserActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish(); */
+
+                        } else {
+                            Toast.makeText(FormUserActivity.this, "Error inesperado al registrar", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
 
                 }
