@@ -56,7 +56,6 @@ public class FormUserActivity extends AppCompatActivity {
                     updates.put("piso", piso);
                     updates.put("telefono", telefono);
 
-                    // XXX PROBLEMA EN LA IMAGEN
 
                     ref.child(id).updateChildren(updates).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -76,8 +75,7 @@ public class FormUserActivity extends AppCompatActivity {
                     });
 
 
-                }
-            }
+                }}
         });
 
     }

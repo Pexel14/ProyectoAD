@@ -219,7 +219,9 @@ public class LoginActivity extends AppCompatActivity {
         Intent f = new Intent(this, FormUserActivity.class);
         f.putExtra("id", idUsuario);
 
-        ref.addValueEventListener(new ValueEventListener() {
+        ref = FirebaseDatabase.getInstance().getReference("usuarios");
+
+        ref.child(idUsuario).addValueEventListener(new ValueEventListener() {
 
                     boolean hasDtaForm;
 
