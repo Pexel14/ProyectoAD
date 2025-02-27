@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,16 +12,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.proyectoad.Incidencia;
+import com.example.proyectoad.R;
 import com.example.proyectoad.databinding.FragmentInicioBinding;
 
 import java.util.ArrayList;
-import java.util.List;
-
 
 public class InicioFragment extends Fragment {
 
     private FragmentInicioBinding binding;
-
     private InicioViewModel model;
     private InicioRecyclerAdapter adapter;
 
@@ -38,21 +36,22 @@ public class InicioFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         model = new ViewModelProvider(this).get(InicioViewModel.class);
 
-        RecyclerView recyclerView = binding.rvIncidencias;
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new InicioRecyclerAdapter(new ArrayList<>());
-        recyclerView.setAdapter(adapter);
+        if(binding != null){
+            RecyclerView recyclerView = binding.rvIncidencias;
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            adapter = new InicioRecyclerAdapter(new ArrayList<>());
+            recyclerView.setAdapter(adapter);
 
-        model.getIncidenciasLiveData().observe(getViewLifecycleOwner(), incidencias -> {
-            if(incidencias != null){
-                adapter.setListaIncidencias(incidencias);
-                adapter.setCargando(false);
-            }
-        });
 
-        model.cargarIncidencias();
-        adapter.setCargando(true);
+            model.getIncidenciasLiveData().observe(getViewLifecycleOwner(), this::cargarIncidencias);
 
+            model.cargarIncidencias();
+            adapter.setCargando(true);
+        }
+    }
+
+    private void cargarIncidencias(ArrayList<Incidencia> incidencias) {
+        adapter.setListaIncidencias(incidencias);
     }
 
     @Override

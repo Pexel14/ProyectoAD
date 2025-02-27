@@ -1,26 +1,25 @@
 package com.example.proyectoad.ui.inicio;
 
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.proyectoad.Incidencias;
+import com.example.proyectoad.Incidencia;
 import com.example.proyectoad.R;
+import com.example.proyectoad.databinding.FragmentIncidenciasBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class InicioRecyclerAdapter extends RecyclerView.Adapter<InicioRecyclerAdapter.IncioViewHolder> {
 
-    private ArrayList<Incidencias> listaIncidencias;
+    private ArrayList<Incidencia> listaIncidencias;
     private boolean cargando;
-    public InicioRecyclerAdapter(ArrayList<Incidencias> listaIncidencias){
+
+    public InicioRecyclerAdapter(ArrayList<Incidencia> listaIncidencias){
         this.listaIncidencias = listaIncidencias;
         this.cargando = false;
     }
@@ -28,21 +27,34 @@ public class InicioRecyclerAdapter extends RecyclerView.Adapter<InicioRecyclerAd
     @NonNull
     @Override
     public IncioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item_incidencia_home, parent, false);
-        return new IncioViewHolder(view);
+        FragmentIncidenciasBinding binding = FragmentIncidenciasBinding.inflate(LayoutInflater.from(parent.getContext()));
+        return new IncioViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull IncioViewHolder holder, int position) {
-        Incidencias incidencia = listaIncidencias.get(position);
-        holder.cargandoBarra(cargando);
+        Incidencia incidencia = listaIncidencias.get(position);
+        //Picasso.get().load(user.getImageUrl()).placeholder(R.drawable.profile).error(R.drawable.profile).into(holder.binding.imgProfile);
 
-        holder.tvTitulo.setText(incidencia.getTitulo());
-        if(incidencia.getFoto().equals(String.valueOf(R.drawable.img_incidencia))){
-            holder.imagen.setImageResource(R.drawable.img_incidencia);
-        } else {
-            holder.imagen.setImageURI(Uri.parse(incidencia.getFoto()));
+        if(incidencia != null){
+            holder.cargandoBarra(cargando);
+            holder.binding.tvTitulo.setText(incidencia.getTitulo());
+
+            Picasso.get()
+                    .load(incidencia.getFoto())
+                    .fit()
+                    .error(R.drawable.img_incidencia)
+                    .placeholder(R.drawable.img_incidencia)
+                .into(holder.binding.ivImagen);
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO entrar dentro de la incidencia
+                }
+            });
         }
+        cargando = true;
     }
 
     @Override
@@ -50,7 +62,7 @@ public class InicioRecyclerAdapter extends RecyclerView.Adapter<InicioRecyclerAd
         return listaIncidencias.size();
     }
 
-    public void setListaIncidencias(ArrayList<Incidencias> listaIncidencias){
+    public void setListaIncidencias(ArrayList<Incidencia> listaIncidencias){
         this.listaIncidencias = listaIncidencias;
         notifyDataSetChanged();
     }
@@ -60,23 +72,25 @@ public class InicioRecyclerAdapter extends RecyclerView.Adapter<InicioRecyclerAd
         notifyDataSetChanged();
     }
 
-    static class IncioViewHolder extends RecyclerView.ViewHolder{
-        ProgressBar progressBar;
-        ImageView imagen;
-        TextView tvTitulo;
+    public void limpiarDatos(){
+        listaIncidencias.clear();
+        notifyDataSetChanged();
+    }
 
-        public IncioViewHolder(@NonNull View itemView) {
-            super(itemView);
-            progressBar = itemView.findViewById(R.id.rvProgressBar);
-            imagen = itemView.findViewById(R.id.ivImagen);
-            tvTitulo = itemView.findViewById(R.id.tvTitulo);
+    static class IncioViewHolder extends RecyclerView.ViewHolder{
+
+        private final FragmentIncidenciasBinding binding;
+
+        public IncioViewHolder(@NonNull FragmentIncidenciasBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         public void cargandoBarra(boolean cargando){
             if(cargando){
-                progressBar.setVisibility(View.VISIBLE);
+                binding.rvProgressBar.setVisibility(View.VISIBLE);
             } else {
-                progressBar.setVisibility(View.GONE);
+                binding.rvProgressBar.setVisibility(View.GONE);
             }
         }
 

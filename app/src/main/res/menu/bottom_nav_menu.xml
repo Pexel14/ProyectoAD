@@ -7,13 +7,13 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_creacion"
         android:icon="@drawable/baseline_add_circle_outline_24"
-        android:title="New Incidence" />
+        android:title="@string/bottm_nav_menu_nueva_incidencia" />
 
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/baseline_person_3_24"
-        android:title="User" />
+        android:title="@string/bottm_nav_menu_perfil" />
 
 </menu>

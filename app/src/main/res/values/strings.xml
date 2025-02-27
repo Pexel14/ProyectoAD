@@ -22,4 +22,14 @@
     <string name="escribe_un_t_tulo_para_la_incidencia">Escribe un título para la incidencia</string>
     <string name="descripci_n">Descripción</string>
     <string name="guardar">Guardar</string>
+    <string name="fragment_creacion_no_hay_titulo">Es necesario que añadas un título a la incidencia</string>
+    <string name="fragment_creacion_no_hay_descripcion">Se debe añadir una descripcion a la incidencia</string>
+    <string name="fragment_creacion_no_hay_imagen">Introduce una imagen para crear la incidencia</string>
+    <string name="fragment_creacion_incidencia_registrada_exito">Incidencia registrada con éxito</string>
+    <string name="fragment_creacion_incidencia_fallo">Error al guardar la incidencia en el sistema</string>
+    <string name="bottm_nav_menu_nueva_incidencia">Crear Incidencia</string>
+    <string name="bottm_nav_menu_perfil">Perfil</string>
+    <string name="fragment_detail_eliminar_incidencia">Eliminar Incidencia</string>
+    <string name="fragmento_inicio_titulo">Incidencias</string>
+    <string name="fragmento_creacion_titulo">Crear Incidencia</string>
 </resources>

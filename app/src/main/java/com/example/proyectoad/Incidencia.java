@@ -1,6 +1,6 @@
 package com.example.proyectoad;
 
-public class Incidencias {
+public class Incidencia {
     private int id;
     private String titulo;
     private String descripcion;
@@ -8,13 +8,19 @@ public class Incidencias {
     private String foto;
     private String estado;
 
-    public Incidencias(int id, String titulo, String descripcion, String comentario, String foto, String estado) {
+    public Incidencia(int id, String titulo, String descripcion, String comentario, String foto, String estado) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.comentario = comentario;
         this.foto = foto;
         this.estado = estado;
+    }
+
+    public Incidencia(Integer id, String titulo, String foto) {
+        this.id = id;
+        this.titulo = titulo;
+        this.foto = foto;
     }
 
     public int getId() {
