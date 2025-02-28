@@ -90,7 +90,7 @@ public class InicioViewModel extends ViewModel {
                         listaIncidencias.add(incidencia);
                     }
                 }
-                incidenciasLiveData.setValue(listaIncidencias);
+                //incidenciasLiveData.setValue(listaIncidencias);
             }
 
             @Override
