@@ -56,7 +56,14 @@ public class RegistroActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     FirebaseUser firebaseUser = mAuth.getCurrentUser();
                                     if (firebaseUser != null) {
+                                        //String userId = firebaseUser.getUid();
                                         guardarUsuarioEnDatabase(username, email, contrasenia);
+
+                                        Intent intent = new Intent(RegistroActivity.this, FormUserActivity.class);
+                                        intent.putExtra("id", email);
+                                        startActivity(intent);
+                                        finish();
+
                                     }
                                 } else {
                                     Toast.makeText(RegistroActivity.this, getString(R.string.registro_error_registro) + task.getException().getMessage(), Toast.LENGTH_LONG).show();

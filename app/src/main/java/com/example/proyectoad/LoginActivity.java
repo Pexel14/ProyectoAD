@@ -23,7 +23,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
             if (result.getResultCode() == RESULT_OK) {
                 Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
 
+
+
                 try {
                     GoogleSignInAccount googleSignInAccount = accountTask.getResult(ApiException.class);
                     AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
@@ -66,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String usuario = mAuth.getCurrentUser().getEmail();
                                 Log.d(TAG, "Usuario: " + usuario);
                                 String id = usuario.split("@")[0].replace(".", "");
+                                String name = mAuth.getCurrentUser().getDisplayName();
                                 mandarUsuarioInicio(id);
                             } else {
                                 Log.d(TAG, "Inicio de sesion FALLIDO: " + task.getException());
@@ -213,10 +215,62 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("usuario", idUsuario);
         editor.apply();
 
+        Intent m = new Intent(this, MainActivity.class);
+        Intent f = new Intent(this, FormUserActivity.class);
+        f.putExtra("id", idUsuario);
 
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-        finish();
+        ref = FirebaseDatabase.getInstance().getReference("usuarios");
+
+        ref.child(idUsuario).addValueEventListener(new ValueEventListener() {
+
+                    boolean hasDtaForm;
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        hasDtaForm = snapshot.hasChild("telefono");
+
+                        if (!hasDtaForm) {
+
+                            // Como el usario entra directo no se crea ningun registro en la base de datos de firebase
+                            // entoces aqui es necesario crear un registro con los datos del usuario por lo menos con
+                            // el email como nunca pasa por el registro este tipo de usarios no tienen contraseña de nuestra app.
+
+                            guardarUsuarioConGoogle(idUsuario);
+
+                            startActivity(f);
+                            finish();
+                        } else {
+                            startActivity(m);
+                            finish();
+                        }
+
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+    }
+
+    private void guardarUsuarioConGoogle(String id) {
+
+        User user = new User("googleBody", id);
+
+        // Guardar en Firebase Realtime Database
+        ref.child(id).setValue(user).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(LoginActivity.this, "Usuario guradado en la base de datos", Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(LoginActivity.this, "Error inesperado al registrar", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }
