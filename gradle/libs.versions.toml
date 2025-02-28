@@ -1,5 +1,6 @@
 [versions]
 agp = "8.6.0"
+circleimageview = "3.1.0"
 firebaseAuth = "23.2.0"
 firebaseBom = "33.9.0"
 firebaseDatabase = "21.0.0"
@@ -24,6 +25,7 @@ credentialsPlayServicesAuth = "1.3.0"
 googleid = "1.1.1"
 
 [libraries]
+circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
 firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-database = { module = "com.google.firebase:firebase-database", version.ref = "firebaseDatabase" }

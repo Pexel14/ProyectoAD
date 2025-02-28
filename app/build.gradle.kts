@@ -58,4 +58,5 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.storage)
     implementation(libs.picasso)
+    implementation (libs.circleimageview) // No quitar va a afectar al perfil
 }
