@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class InicioViewModel extends ViewModel {
-    private final MutableLiveData<ArrayList<Incidencias>> incidenciasLiveData = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<Incidencia>> incidenciasLiveData = new MutableLiveData<>();
 
     private DatabaseReference refUsuarios;
     private DatabaseReference refIncidencias;
