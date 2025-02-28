@@ -20,12 +20,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvIncidencias"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         tools:listitem="@layout/fragment_incidencias"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_tv_welcome" />
+        app:layout_constraintTop_toBottomOf="@+id/home_tv_welcome"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

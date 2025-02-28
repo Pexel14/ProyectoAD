@@ -1,12 +1,13 @@
-package com.example.proyectoad.home.view;
+package com.example.proyectoad.ui.creacion;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,31 +15,32 @@ import android.view.ViewGroup;
 
 import com.example.proyectoad.R;
 import com.example.proyectoad.databinding.FragmentDetailIncidenciaBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 
 public class Detail_Incidencia_Fragment extends Fragment {
 
     private FragmentDetailIncidenciaBinding binding;
+    private DatabaseReference incidenciaRef;
+    private String id;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentDetailIncidenciaBinding.inflate(inflater, container, false);
+        return binding.getRoot(); // Regresa la vista raíz de binding
+    }
 
-        Intent i = getActivity().getIntent();
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        if (i != null) {
-
-            binding.tvNameIncidencia.setText(i.getStringExtra("titulo"));
-            binding.tvDescripcion.setText(i.getStringExtra("descripcion"));
-            binding.tvestado.setText(i.getStringExtra("estado"));
-            Picasso.get()
-                    .load(i.getStringExtra("imageUrl"))
-                    .placeholder(R.drawable.baseline_image_24)
-                    .into(binding.ivIncidencia);
-            binding.tvComentario.setText(i.getStringExtra("comentario"));
-
-
-        }
+        binding.ibtnGoBack.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.navigation_home);
+        });
 
         binding.ibtnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,9 +49,9 @@ public class Detail_Incidencia_Fragment extends Fragment {
             }
         });
 
-        return binding.getRoot(); // Regresa la vista raíz de binding
     }
 
-
-
+    public void setId(String id) {
+        this.id = id;
+    }
 }

@@ -5,11 +5,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectoad.Incidencia;
 import com.example.proyectoad.R;
 import com.example.proyectoad.databinding.FragmentIncidenciasBinding;
+import com.example.proyectoad.ui.creacion.DetailModelView;
+import com.example.proyectoad.ui.creacion.Detail_Incidencia_Fragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,7 +26,7 @@ public class InicioRecyclerAdapter extends RecyclerView.Adapter<InicioRecyclerAd
 
     public InicioRecyclerAdapter(ArrayList<Incidencia> listaIncidencias){
         this.listaIncidencias = listaIncidencias;
-        this.cargando = false;
+        this.cargando = true;
     }
 
     @NonNull
@@ -46,15 +51,8 @@ public class InicioRecyclerAdapter extends RecyclerView.Adapter<InicioRecyclerAd
                     .error(R.drawable.img_incidencia)
                     .placeholder(R.drawable.img_incidencia)
                 .into(holder.binding.ivImagen);
-
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //TODO entrar dentro de la incidencia
-                }
-            });
         }
-        cargando = true;
+        cargando = false;
     }
 
     @Override

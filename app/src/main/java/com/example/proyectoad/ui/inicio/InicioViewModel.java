@@ -90,9 +90,11 @@ public class InicioViewModel extends ViewModel {
         refUsuarios.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String [] incidencias = snapshot.child("incidencias").getValue(String.class).split(",");
-                if(incidencias.length != 0){
-                    buscarIncidencias(incidencias);
+                if(snapshot.hasChild("incidencias")){
+                    String [] incidencias = snapshot.child("incidencias").getValue(String.class).split(",");
+                    if(incidencias.length != 0){
+                        buscarIncidencias(incidencias);
+                    }
                 }
             }
 

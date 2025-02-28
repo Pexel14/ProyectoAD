@@ -9,6 +9,14 @@
     android:background="#41C7F4AD"
     android:padding="16dp">
 
+    <View
+        android:id="@+id/fondoOscuro"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:elevation="7dp"
+        android:visibility="gone"/>
+
     <TextView
         android:id="@+id/tvCreacionTitulo"
         android:layout_width="match_parent"
@@ -29,6 +37,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:elevation="8dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"

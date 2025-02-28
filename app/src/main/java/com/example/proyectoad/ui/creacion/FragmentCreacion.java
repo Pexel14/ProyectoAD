@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,16 +68,17 @@ public class FragmentCreacion extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentCreacionBinding.inflate(inflater, container, false);
+        mAuth = FirebaseAuth.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference("incidencias");
+        incidenciasReference = FirebaseDatabase.getInstance().getReference("incidencias");
+        usuariosReference = FirebaseDatabase.getInstance().getReference("usuarios");
+        encontrarUltimoID();
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mAuth = FirebaseAuth.getInstance();
-        storageReference = FirebaseStorage.getInstance().getReference("incidencias");
-        incidenciasReference = FirebaseDatabase.getInstance().getReference("incidencias");
-        usuariosReference = FirebaseDatabase.getInstance().getReference("usuarios");
 
         binding.imgAddIncidencia.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -91,16 +93,19 @@ public class FragmentCreacion extends Fragment {
             if(!titulo.isEmpty()){
                 if(!descripcion.isEmpty()){
                     if(imagen != null){
-                        encontrarUltimoID();
+                        binding.fondoOscuro.setVisibility(View.VISIBLE);
+                        binding.progressBar.setVisibility(View.VISIBLE);
                         StorageReference archivo = storageReference.child(titulo + "_" + idIncidencia + ".jpg");
-                        archivo.putFile(imagen).addOnSuccessListener(uri -> {
-                            Incidencia incidencia = new Incidencia(
-                                    idIncidencia,
-                                    titulo,
-                                    descripcion,
-                                    "",
-                                    uri.toString(),
-                                    "Sin Revisar"
+                        archivo.putFile(imagen).addOnSuccessListener(taskSnapshot -> {
+                            archivo.getDownloadUrl().addOnSuccessListener(uri -> {
+                                String url = uri.toString();
+                                Incidencia incidencia = new Incidencia(
+                                        idIncidencia,
+                                        titulo,
+                                        descripcion,
+                                        "",
+                                        url,
+                                        "Sin Revisar"
                             );
                             incidenciasReference.child(String.valueOf(idIncidencia)).setValue(incidencia).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -116,7 +121,11 @@ public class FragmentCreacion extends Fragment {
                                     }
                                 }
                             });
-                        });
+                            binding.fondoOscuro.setVisibility(View.GONE);
+                            binding.progressBar.setVisibility(View.GONE);
+                        }
+                    );
+                });
                     } else {
                         Toast.makeText(getContext(), R.string.fragment_creacion_no_hay_imagen, Toast.LENGTH_SHORT).show();
                     }
