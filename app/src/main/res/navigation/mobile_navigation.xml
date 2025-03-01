@@ -20,4 +20,9 @@
         android:name="com.example.proyectoad.ui.creacion.FragmentCreacion"
         android:label="fragment_creacion"
         tools:layout="@layout/fragment_creacion"/>
+    <fragment
+        android:id="@+id/navigation_perfil"
+        android:name="com.example.proyectoad.ui.perfil.PerfilFragment"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" />
 </navigation>
