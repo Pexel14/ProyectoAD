@@ -1,66 +1,159 @@
 package com.example.proyectoad.ui.perfil;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.proyectoad.R;
+import com.example.proyectoad.databinding.FragmentEditarPerfilBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EditarPerfilFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class EditarPerfilFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private FragmentEditarPerfilBinding binding;
+    private Uri imagen;
+    private StorageReference storageReference;
+    private DatabaseReference usuariosReference;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private final ActivityResultLauncher<Intent> galeryLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() != Activity.RESULT_OK && result.getData() == null) {
+                    Toast.makeText(getContext(), "No se selecciono ninguna imagen", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Uri selectedImage = result.getData().getData();
 
-    public EditarPerfilFragment() {
-        // Required empty public constructor
+                if(selectedImage == null){
+                    Toast.makeText(getContext(), "No se selecciono ninguna imagen", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Picasso.get()
+                        .load(selectedImage)
+                        .placeholder(R.drawable.baseline_image_24).fit()
+                        .error(R.drawable.baseline_image_24)
+                        .into(binding.imgPerfilUser);
+                imagen = selectedImage;
+            }
+    );
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentEditarPerfilBinding.inflate(inflater, container, false );
+        usuariosReference = FirebaseDatabase.getInstance().getReference("usuarios");
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String userId = email.split("@")[0];
+        storageReference = FirebaseStorage.getInstance().getReference("fotos_perfil");
+        View root = binding.getRoot();
+
+        View.OnClickListener listener = v -> abrirArchivos();
+        binding.ibtnEdit.setOnClickListener(listener);
+        binding.imgPerfilUser.setOnClickListener(listener);
+
+        binding.btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nombre = binding.etNombre.getText().toString();
+                String apellidos = binding.etApellido.getText().toString();
+                String piso = binding.etPiso.getText().toString();
+                String telefono = binding.etTelefono.getText().toString();
+
+                if (nombre.isEmpty() || apellidos.isEmpty() || piso.isEmpty() || telefono.isEmpty() || imagen == null) {
+                    Toast.makeText(getContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                usuariosReference.child(userId).child("nombre").setValue(nombre);
+                usuariosReference.child(userId).child("apellidos").setValue(apellidos);
+                usuariosReference.child(userId).child("piso").setValue(piso);
+                usuariosReference.child(userId).child("telefono").setValue(telefono);
+
+                // Alamacenamiento con storage
+                usuariosReference.child(userId).child("foto_perfil").setValue(imagen.toString());
+                StorageReference archivo = storageReference.child(userId + ".png");
+                archivo.putFile(imagen).addOnSuccessListener(taskSnapshot -> {
+                    archivo.getDownloadUrl().addOnSuccessListener(uri -> {
+                        String url = uri.toString();
+                        usuariosReference.child(userId).child("foto_perfil").setValue(url);
+                    });
+                });
+
+                volverAtras();
+
+            }
+        });
+
+        View.OnClickListener lsnVolverAtras = v -> volverAtras();
+        binding.btnCancelar.setOnClickListener(lsnVolverAtras);
+
+        return root;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EditarPerfilFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EditarPerfilFragment newInstance(String param1, String param2) {
-        EditarPerfilFragment fragment = new EditarPerfilFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    private void volverAtras() {
+        Navigation.findNavController(getView()).popBackStack();
+    }
+
+    private void abrirArchivos() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("image/*");
+        galeryLauncher.launch(intent);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        PerfilViewModel model = new ViewModelProvider(this).get(PerfilViewModel.class);
+        final ImageView ivPerfil = binding.imgPerfilUser;
+        final TextView tvCorreo = binding.tvCorreo;
+        final EditText etNombre = binding.etNombre;
+        final EditText etApellidos = binding.etApellido;
+        final EditText etPiso = binding.etPiso;
+        final EditText etTelefono = binding.etTelefono;
+
+        model.getFotoPerfil().observe(getViewLifecycleOwner(), fotoUrl -> {
+            if (fotoUrl != null && !fotoUrl.isEmpty()) {
+                Picasso.get().load(fotoUrl).placeholder(R.drawable.user).into(ivPerfil);
+            } else {
+                ivPerfil.setImageResource(R.drawable.user);
+            }
+        });
+        model.getCorreo().observe(getViewLifecycleOwner(), tvCorreo::setText);
+        model.getNombre().observe(getViewLifecycleOwner(), etNombre::setText);
+        model.getApellidos().observe(getViewLifecycleOwner(), etApellidos::setText);
+        model.getPiso().observe(getViewLifecycleOwner(), etPiso::setText);
+        model.getTelefono().observe(getViewLifecycleOwner(), etTelefono::setText);
+
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_editar_perfil, container, false);
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

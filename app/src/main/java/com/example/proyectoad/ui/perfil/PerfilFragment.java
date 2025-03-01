@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.proyectoad.LoginActivity;
 import com.example.proyectoad.R;
@@ -59,8 +60,6 @@ public class PerfilFragment extends Fragment {
         perfilViewModel.getFotoPerfil().observe(getViewLifecycleOwner(), fotoUrl -> {
             if (fotoUrl != null && !fotoUrl.isEmpty()) {
                 Picasso.get().load(fotoUrl).placeholder(R.drawable.user).into(ivPerfil);
-            } else {
-                ivPerfil.setImageResource(R.drawable.user);
             }
         });
         perfilViewModel.getNombreCompleto().observe(getViewLifecycleOwner(), tvNombreCompleto::setText);
@@ -75,6 +74,13 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 cerrarSesion();
+            }
+        });
+
+        binding.ibtnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_navigation_perfil_to_editarPerfilFragment);
             }
         });
 

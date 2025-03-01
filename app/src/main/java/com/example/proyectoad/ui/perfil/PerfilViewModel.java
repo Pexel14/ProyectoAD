@@ -84,11 +84,11 @@ public class PerfilViewModel extends ViewModel {
 
                     String fotoPerfilId = dataSnapshot.child("foto_perfil").getValue(String.class);
 
-                    if (userLoged.getPhotoUrl() != null) {
-                        fotoPerfil.setValue(userLoged.getPhotoUrl().toString());
-                    }
-                    else if (fotoPerfilId != null && !fotoPerfilId.isEmpty()) {
+                    if (fotoPerfilId != null && !fotoPerfilId.isEmpty()) {
                         fotoPerfil.setValue(fotoPerfilId);
+                    }
+                    else if (userLoged.getPhotoUrl() != null) {
+                        fotoPerfil.setValue(userLoged.getPhotoUrl().toString());
                     }
                     else {
                         fotoPerfil.setValue(String.valueOf(R.drawable.user));

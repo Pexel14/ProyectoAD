@@ -24,5 +24,13 @@
         android:id="@+id/navigation_perfil"
         android:name="com.example.proyectoad.ui.perfil.PerfilFragment"
         android:label="fragment_perfil"
-        tools:layout="@layout/fragment_perfil" />
+        tools:layout="@layout/fragment_perfil" >
+        <action
+            android:id="@+id/action_navigation_perfil_to_editarPerfilFragment"
+            app:destination="@id/editarPerfilFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarPerfilFragment"
+        android:name="com.example.proyectoad.ui.perfil.EditarPerfilFragment"
+        android:label="EditarPerfilFragment" />
 </navigation>

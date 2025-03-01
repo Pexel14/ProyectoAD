@@ -11,6 +11,7 @@
         android:id="@+id/ibtnEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/durazno"
         android:src="@drawable/baseline_edit_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -46,14 +47,15 @@
                 android:layout_height="wrap_content"
                 android:text="Nombre Apellidos"
                 android:textSize="23sp"
-                android:textColor="@color/perfil_tvUsario"
+                android:textColor="@color/principal"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvCorreo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="userName@gmail.com" />
+                android:text="userName@gmail.com"
+                android:textColor="@color/purple_500" />
 
         </LinearLayout>
 
@@ -63,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
-        android:backgroundTint="#969696"
+        android:backgroundTint="@color/principal"
         app:cardCornerRadius="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,13 +91,14 @@
                 <ImageView
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    android:src="@drawable/ic_home_black_24dp" />
+                    android:src="@drawable/baseline_home_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="Piso: "
+                    android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
                 <TextView
@@ -104,6 +107,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="d3"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -122,13 +127,14 @@
                 <ImageView
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    android:src="@drawable/baseline_local_phone_24" />
+                    android:src="@drawable/baseline_phone_iphone_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="Teléfono: "
+                    android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
                 <TextView
@@ -136,7 +142,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
                     android:text="123675234"
+                    android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -155,21 +163,24 @@
                 <ImageView
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    android:src="@drawable/baseline_person_24" />
+                    android:src="@drawable/baseline_person_2_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="Roll: "
+                    android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvEsAdmin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     android:text="Administrador/Vecino"
+                    android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -184,14 +195,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
                 android:textSize="17sp"
                 android:text="@string/cerrar_sesion"
+                android:textColor="@color/white"
                 android:padding="16dp"
-                android:backgroundTint="#F65959"
+                android:backgroundTint="@color/durazno"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

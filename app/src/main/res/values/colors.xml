@@ -9,6 +9,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="principal">#9674E4</color>
+    <color name="secondary">#BBA2FF</color>
+
+    <color name="amarillo_suave">#FFFACD</color>
+    <color name="durazno">#E6A66B</color>
+
     <color name="perfil_cardContainer">#969696</color>
     <color name="perfil_tvUsario">#898888</color>
     <color name="perfil_tvCorreo">#969696</color>
