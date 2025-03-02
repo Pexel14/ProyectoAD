@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">ProyectoAD</string>
+    <string name="app_name">Alerty</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="m_s_opciones">MÁS OPCIONES</string>
-    <string name="introduce_tu_nombre">Introduce tu nombre</string>
+    <string name="introduce_tu_nombre">Introduce tu nombre de usuario</string>
     <string name="introduce_tu_contrase_a">Introduce tu contraseña</string>
     <string name="iniciar_sesi_n">Iniciar Sesión</string>
     <string name="no_tienes_una_cuenta_n_registrate">¿No tienes una cuenta? \n Regístrate</string>
@@ -67,4 +67,5 @@
     <string name="fragment_perfil_piso">Piso:</string>
     <string name="fragment_perfil_telefono">Teléfono:</string>
     <string name="fragment_incidencia_rol">Rol:</string>
+    <string name="form_user_introduce_tu_nombre">Introduce tu nombre</string>
 </resources>

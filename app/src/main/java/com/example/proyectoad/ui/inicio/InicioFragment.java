@@ -56,6 +56,9 @@ public class InicioFragment extends Fragment {
     }
 
     private void cargarIncidencias(ArrayList<Incidencia> incidencias) {
+        if(!incidencias.isEmpty()){
+            binding.tvMensajeVacio.setVisibility(View.GONE);
+        }
         adapter.setListaIncidencias(incidencias);
     }
 

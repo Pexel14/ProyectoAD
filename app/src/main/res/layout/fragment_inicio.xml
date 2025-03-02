@@ -26,9 +26,10 @@
         android:text="@string/fragment_inicio_sin_incidencias"
         android:textAlignment="center"
         android:textStyle="bold"
-        android:elevation="4dp"
+        android:textColor="@color/black"
+        android:elevation="0dp"
         android:textSize="32sp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

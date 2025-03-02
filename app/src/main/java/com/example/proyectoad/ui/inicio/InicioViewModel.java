@@ -187,7 +187,9 @@ public class InicioViewModel extends ViewModel {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String bucket = "incidencias/" + snapshot.child("titulo").getValue(String.class) + "_" + snapshot.child("id").getValue().toString() + ".jpg";
                 storageReference.child(bucket);
-                storageReference.delete();
+                storageReference.getMetadata().addOnCompleteListener(metadata -> {
+                    storageReference.delete();
+                });
             }
 
             @Override

@@ -13,7 +13,6 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/logo_app"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -46,7 +45,7 @@
         android:layout_width="match_parent"
 
         android:layout_height="wrap_content"
-        android:hint="@string/introduce_tu_nombre"
+        android:hint="@string/form_user_introduce_tu_nombre"
         app:endIconMode="clear_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNombre">

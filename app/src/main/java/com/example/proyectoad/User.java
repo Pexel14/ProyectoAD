@@ -18,11 +18,13 @@ public class User {
         this.es_admin = false;
     }
 
+
     public User(String nombre, String correo, String contrasenia){
         this.nombre = nombre;
         this.correo = correo;
         this.contrasenia = contrasenia;
         this.foto_perfil = String.valueOf(R.drawable.userprofile);
+        this.incidencias = "";
         this.es_admin = false;
     }
 

@@ -78,7 +78,7 @@ public class RegistroActivity extends AppCompatActivity {
 
         String id = email.split("@")[0].replace(".", "");
         User user = new User(username, email, contrasenia);
-        user.setIncidencias("");
+
         // Guardar en Firebase Realtime Database
         ref.child(id).setValue(user).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
