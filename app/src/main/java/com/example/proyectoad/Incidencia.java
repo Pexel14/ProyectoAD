@@ -27,6 +27,13 @@ public class Incidencia {
         this.foto = foto;
     }
 
+    public Incidencia(Integer id, String titulo, String foto, String descripcion) {
+        this.id = id;
+        this.titulo = titulo;
+        this.foto = foto;
+        this.descripcion = descripcion;
+    }
+
     public int getId() {
         return id;
     }

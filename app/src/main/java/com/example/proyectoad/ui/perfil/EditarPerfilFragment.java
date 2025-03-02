@@ -82,7 +82,7 @@ public class EditarPerfilFragment extends Fragment {
                 String piso = binding.etPiso.getText().toString();
                 String telefono = binding.etTelefono.getText().toString();
 
-                if (nombre.isEmpty() || apellidos.isEmpty() || piso.isEmpty() || telefono.isEmpty() || imagen == null) {
+                if (nombre.isEmpty() || apellidos.isEmpty() || piso.isEmpty() || telefono.isEmpty()) {
                     Toast.makeText(getContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -92,15 +92,17 @@ public class EditarPerfilFragment extends Fragment {
                 usuariosReference.child(userId).child("piso").setValue(piso);
                 usuariosReference.child(userId).child("telefono").setValue(telefono);
 
-                // Alamacenamiento con storage
-                usuariosReference.child(userId).child("foto_perfil").setValue(imagen.toString());
-                StorageReference archivo = storageReference.child(userId + ".png");
-                archivo.putFile(imagen).addOnSuccessListener(taskSnapshot -> {
-                    archivo.getDownloadUrl().addOnSuccessListener(uri -> {
-                        String url = uri.toString();
-                        usuariosReference.child(userId).child("foto_perfil").setValue(url);
+                if(imagen != null){
+                    // Alamacenamiento con storage
+                    usuariosReference.child(userId).child("foto_perfil").setValue(imagen.toString());
+                    StorageReference archivo = storageReference.child(userId + ".png");
+                    archivo.putFile(imagen).addOnSuccessListener(taskSnapshot -> {
+                        archivo.getDownloadUrl().addOnSuccessListener(uri -> {
+                            String url = uri.toString();
+                            usuariosReference.child(userId).child("foto_perfil").setValue(url);
+                        });
                     });
-                });
+                }
 
                 volverAtras();
 

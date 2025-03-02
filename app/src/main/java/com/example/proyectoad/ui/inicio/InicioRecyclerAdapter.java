@@ -3,6 +3,7 @@ package com.example.proyectoad.ui.inicio;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,12 +82,14 @@ public class InicioRecyclerAdapter extends RecyclerView.Adapter<InicioRecyclerAd
             alertDialog.setPositiveButton(R.string.inicio_adapter_confirmacion, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    model.eliminarIncidencia(String.valueOf(listaIncidencias.get(position).getId()));
+                    if(position < listaIncidencias.size()){
+                        model.eliminarIncidencia(String.valueOf(listaIncidencias.get(position).getId()));
 
-                    listaIncidencias.remove(position);
-                    notifyItemRemoved(position);
+                        listaIncidencias.remove(position);
+                        notifyItemRemoved(position);
 
-                    Toast.makeText(v.getContext(), R.string.inicio_adapter_exito_eliminar, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(), R.string.inicio_adapter_exito_eliminar, Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alertDialog.setNegativeButton(R.string.inicio_adapter_denegacion, null);

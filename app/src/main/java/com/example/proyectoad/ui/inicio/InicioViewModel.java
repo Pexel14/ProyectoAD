@@ -73,12 +73,14 @@ public class InicioViewModel extends ViewModel {
                 String titulo;
                 String foto;
                 int id;
+                String descripcion;
                 for (DataSnapshot data : snapshot.getChildren()) {
                     titulo = data.child("titulo").getValue(String.class);
                     foto = data.child("foto").getValue(String.class);
                     id = data.child("id").getValue(Integer.class);
+                    descripcion = data.child("descripcion").getValue(String.class);
 
-                    listaIncidencias.add(new Incidencia(id, titulo, foto));
+                    listaIncidencias.add(new Incidencia(id, titulo, foto, descripcion));
 
                 }
 //            incidenciasLiveData.setValue(listaIncidencias);
@@ -122,12 +124,14 @@ public class InicioViewModel extends ViewModel {
                         String titulo;
                         String foto;
                         Integer id;
+                        String descripcion;
                         Log.d("FragmentsIncidencias", snapshot.getKey() + " - " + snapshot.getChildrenCount());
                         titulo = snapshot.child("titulo").getValue(String.class);
                         foto = snapshot.child("foto").getValue(String.class);
-                        id =Integer.parseInt(snapshot.child("id").getValue().toString());
+                        id = Integer.parseInt(snapshot.child("id").getValue().toString());
+                        descripcion = snapshot.child("descripcion").getValue(String.class);
                         cont++;
-                        listaIncidencias.add(new Incidencia(id, titulo, foto));
+                        listaIncidencias.add(new Incidencia(id, titulo, foto, descripcion));
 
                         if(cont == incidencias.length){
                             incidenciasLiveData.postValue(listaIncidencias);

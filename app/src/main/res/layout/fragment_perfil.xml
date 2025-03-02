@@ -97,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Piso: "
+                    android:text="@string/fragment_perfil_piso"
                     android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
@@ -133,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Teléfono: "
+                    android:text="@string/fragment_perfil_telefono"
                     android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
@@ -169,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Roll: "
+                    android:text="@string/fragment_incidencia_rol"
                     android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
