@@ -63,4 +63,5 @@
     <string name="detail_incidencia_error_modificar">Ha ocurrido un error al guardar los cambios</string>
     <string name="detail_incidencia_exito_modificar">Se han guardado los cambios</string>
     <string name="inicio_adapter_compartir_incidencia">¡Hay un problema en la comunidad!\nDescripción: \"$1%s\"\n</string>
+    <string name="cerrar_sesion">CERRAR SESION</string>
 </resources>
