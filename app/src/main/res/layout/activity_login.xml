@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
+    android:backgroundTint="#F3F3F3"
     android:padding="16dp"
     >
 
@@ -95,7 +96,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="@string/iniciar_sesi_n"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:backgroundTint="#9674E4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />

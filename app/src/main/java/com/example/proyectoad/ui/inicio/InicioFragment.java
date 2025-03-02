@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,14 +40,18 @@ public class InicioFragment extends Fragment {
         if(binding != null){
             RecyclerView recyclerView = binding.rvIncidencias;
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            adapter = new InicioRecyclerAdapter(new ArrayList<>());
+            adapter = new InicioRecyclerAdapter(new ArrayList<>(), (position, mode) -> {
+                Incidencia incidencia = model.getIncidenciasLiveData().getValue().get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", String.valueOf(incidencia.getId()));
+                bundle.putInt("tipo", mode);
+                Navigation.findNavController(view).navigate(R.id.detail_Incidencia_Fragment, bundle);
+            }, model);
             recyclerView.setAdapter(adapter);
-
 
             model.getIncidenciasLiveData().observe(getViewLifecycleOwner(), this::cargarIncidencias);
 
             model.cargarIncidencias();
-            adapter.setCargando(true);
         }
     }
 

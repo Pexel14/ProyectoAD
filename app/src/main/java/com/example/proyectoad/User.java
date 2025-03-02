@@ -38,6 +38,8 @@ public class User {
         this.es_admin = es_admin;
     }
 
+    public User(){}
+
     public String getCorreo() {
         return correo;
     }

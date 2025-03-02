@@ -130,7 +130,6 @@ public class LoginActivity extends AppCompatActivity {
             if (usuario != null) {
                 String id = usuario.split("@")[0].replace(".", "");
                 Log.d(TAG, "ID: " + id);
-
                 mandarUsuarioInicio(id);
             }
         }

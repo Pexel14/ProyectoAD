@@ -1,5 +1,8 @@
 package com.example.proyectoad.ui.inicio;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,6 +16,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.proyectoad.R;
 import com.example.proyectoad.databinding.FragmentIncidenciasBinding;
@@ -46,20 +50,6 @@ public class FragmentIncidencias extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        String titulo = getArguments().getString("titulo");
-        String foto = getArguments().getString("foto");
-        String key = getArguments().getString("key");
-
-        binding.ivImagen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DetailModelView detailModelView = new ViewModelProvider(requireActivity()).get(DetailModelView.class);
-                detailModelView.setId(key);
-                Navigation.findNavController(v).navigate(R.id.detail_Incidencia_Fragment);
-            }
-        });
-
     }
 
     @Override

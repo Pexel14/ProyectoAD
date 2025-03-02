@@ -1,20 +1,19 @@
 package com.example.proyectoad.ui.inicio;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectoad.Incidencia;
 import com.example.proyectoad.R;
 import com.example.proyectoad.databinding.FragmentIncidenciasBinding;
-import com.example.proyectoad.ui.creacion.DetailModelView;
-import com.example.proyectoad.ui.creacion.Detail_Incidencia_Fragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,11 +21,13 @@ import java.util.ArrayList;
 public class InicioRecyclerAdapter extends RecyclerView.Adapter<InicioRecyclerAdapter.IncioViewHolder> {
 
     private ArrayList<Incidencia> listaIncidencias;
-    private boolean cargando;
+    private final OnItemClickListener listener;
+    private InicioViewModel model;
 
-    public InicioRecyclerAdapter(ArrayList<Incidencia> listaIncidencias){
+    public InicioRecyclerAdapter(ArrayList<Incidencia> listaIncidencias,  OnItemClickListener listener, InicioViewModel model){
         this.listaIncidencias = listaIncidencias;
-        this.cargando = true;
+        this.listener = listener;
+        this.model = model;
     }
 
     @NonNull
@@ -42,7 +43,6 @@ public class InicioRecyclerAdapter extends RecyclerView.Adapter<InicioRecyclerAd
         //Picasso.get().load(user.getImageUrl()).placeholder(R.drawable.profile).error(R.drawable.profile).into(holder.binding.imgProfile);
 
         if(incidencia != null){
-            holder.cargandoBarra(cargando);
             holder.binding.tvTitulo.setText(incidencia.getTitulo());
 
             Picasso.get()
@@ -50,9 +50,50 @@ public class InicioRecyclerAdapter extends RecyclerView.Adapter<InicioRecyclerAd
                     .fit()
                     .error(R.drawable.img_incidencia)
                     .placeholder(R.drawable.img_incidencia)
-                .into(holder.binding.ivImagen);
+                    .into(holder.binding.ivImagen);
         }
-        cargando = false;
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(position, 0);
+            }
+        });
+
+        holder.binding.btnCompartir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, String.format(v.getContext().getString(R.string.inicio_adapter_compartir_incidencia), incidencia.getDescripcion()));
+                v.getContext().startActivity(Intent.createChooser(intent, "Compartir con: "));
+            }
+        });
+
+        holder.binding.btnEditar.setOnClickListener(v -> {
+            if(listener != null){
+                listener.onItemClick(position, 1);
+            }
+        });
+
+        holder.binding.btnBorrar.setOnClickListener(v -> {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(v.getContext());
+            alertDialog.setTitle(R.string.inicio_adapter_titulo_alerta).setMessage(R.string.inicio_adapter_mensaje_alerta);
+            alertDialog.setPositiveButton(R.string.inicio_adapter_confirmacion, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    model.eliminarIncidencia(String.valueOf(listaIncidencias.get(position).getId()));
+
+                    listaIncidencias.remove(position);
+                    notifyItemRemoved(position);
+
+                    Toast.makeText(v.getContext(), R.string.inicio_adapter_exito_eliminar, Toast.LENGTH_SHORT).show();
+                }
+            });
+            alertDialog.setNegativeButton(R.string.inicio_adapter_denegacion, null);
+            AlertDialog crearAlerta = alertDialog.create();
+            crearAlerta.show();
+        });
+
     }
 
     @Override
@@ -60,18 +101,12 @@ public class InicioRecyclerAdapter extends RecyclerView.Adapter<InicioRecyclerAd
         return listaIncidencias.size();
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(int position, int mode);
+    }
+
     public void setListaIncidencias(ArrayList<Incidencia> listaIncidencias){
         this.listaIncidencias = listaIncidencias;
-        notifyDataSetChanged();
-    }
-
-    public void setCargando(boolean cargando){
-        this.cargando = cargando;
-        notifyDataSetChanged();
-    }
-
-    public void limpiarDatos(){
-        listaIncidencias.clear();
         notifyDataSetChanged();
     }
 
@@ -82,14 +117,6 @@ public class InicioRecyclerAdapter extends RecyclerView.Adapter<InicioRecyclerAd
         public IncioViewHolder(@NonNull FragmentIncidenciasBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-        }
-
-        public void cargandoBarra(boolean cargando){
-            if(cargando){
-                binding.rvProgressBar.setVisibility(View.VISIBLE);
-            } else {
-                binding.rvProgressBar.setVisibility(View.GONE);
-            }
         }
 
     }

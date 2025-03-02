@@ -5,51 +5,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.creacion.Detail_Incidencia_Fragment"
-    android:padding="16dp"
-    android:background="#41C7F4AD"
-    >
+    android:backgroundTint="#F3F3F3"
+    android:background="#41C7F4AD">
 
-    <!-- TODO: Update blank fragment layout -->
+    <View
+        android:id="@+id/viewOscuro"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:elevation="20dp"
+        android:visibility="gone"/>
+
+    <ProgressBar
+        android:id="@+id/diProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:elevation="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:indeterminate="true"/>
 
     <ImageButton
         android:id="@+id/ibtnGoBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/go_back_24"
-        android:backgroundTint="@color/bar_color"
+        android:backgroundTint="#9674E4"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toTopOf="@id/ibtnGoBack"
+        android:textAlignment="viewEnd"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:backgroundTint="#FFFC8C"
+        android:backgroundTint="#9674E4"
         app:cardCornerRadius="12dp"
         app:cardElevation="6dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ibtnGoBack"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/ibtnGoBack">
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:id="@+id/tvNameIncidencia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="IncidenciaName" />
+                <TextView
+                    android:id="@+id/tvNameIncidencia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="IncidenciaName" />
 
             <ImageView
                 android:id="@+id/ivIncidencia"
                 android:layout_width="match_parent"
-                android:layout_height="225dp"
+                android:layout_height="170dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/edittext_rounded"
                 android:scaleType="centerCrop" />
@@ -59,30 +93,33 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:backgroundTint="#DAF6B6"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
-                <TextView
-                    android:id="@+id/tvestado"
+                <Spinner
+                    android:id="@+id/spnEstado"
+                    android:foregroundTint="@color/black"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:layout_marginRight="20dp"
-                    android:text="estado"
-                    android:textAlignment="center"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content" />
 
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/tvDescripcion"
+            <EditText
+                android:id="@+id/etDescripcion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Descripción"
-                android:textStyle="italic"
+                android:hint="Descripción"
+                android:textColor="@color/black"
+                android:gravity="top"
+                android:padding="10dp"
+                android:background="@drawable/edittext_rounded"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:scrollbars="vertical"
+                android:textStyle="italic" />
 
-                />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -90,13 +127,15 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewComent"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:backgroundTint="#FFFC8C"
+        android:layout_height="150dp"
+        android:backgroundTint="#9674E4"
         android:orientation="vertical"
         android:padding="16dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="6dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnModificar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2">
@@ -111,25 +150,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="Admin" />
+                android:textColor="@color/white"
+                android:text="Admin"
+                android:textStyle="bold"/>
 
-            <ScrollView
+            <EditText
+                android:id="@+id/etComentario"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:hint="Comentario"
+                android:textColor="@color/black"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:lines="4"
                 android:background="@drawable/edittext_rounded"
-
-                >
-
-                <TextView
-                    android:id="@+id/tvComentario"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="Comentario "
-                    android:textSize="16sp" />
-
-            </ScrollView>
-
+                android:gravity="top"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -137,11 +174,15 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/btnEliminar"
+        android:id="@+id/btnModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="@string/fragment_detail_eliminar_incidencia"
+        android:backgroundTint="#01E060"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        android:layout_marginBottom="16dp"
+        android:text="@string/fragment_detail_modificar_incidencia"
         app:layout_constraintTop_toBottomOf="@+id/cardViewComent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

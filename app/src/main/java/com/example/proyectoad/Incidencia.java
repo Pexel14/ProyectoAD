@@ -7,14 +7,18 @@ public class Incidencia {
     private String comentario;
     private String foto;
     private String estado;
+    private String usuario;
 
-    public Incidencia(int id, String titulo, String descripcion, String comentario, String foto, String estado) {
+    public Incidencia(){}
+
+    public Incidencia(int id, String titulo, String descripcion, String comentario, String foto, String estado, String usuario) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.comentario = comentario;
         this.foto = foto;
         this.estado = estado;
+        this.usuario = usuario;
     }
 
     public Incidencia(Integer id, String titulo, String foto) {
@@ -69,5 +73,13 @@ public class Incidencia {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 }

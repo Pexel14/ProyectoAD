@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.proyectoad.Incidencia;
+import com.example.proyectoad.User;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -15,6 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -23,8 +27,10 @@ public class InicioViewModel extends ViewModel {
 
     private DatabaseReference refUsuarios;
     private DatabaseReference refIncidencias;
+    private StorageReference storageReference;
     private FirebaseUser usuario;
     private static int cont;
+    private static String id1;
 
     public InicioViewModel(){
 
@@ -135,5 +141,55 @@ public class InicioViewModel extends ViewModel {
                 }
             });
         }
+    }
+
+    public void eliminarIncidencia(String key) {
+        String email = usuario.getEmail().split("@")[0].replace(",","");
+        refUsuarios.child(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if(!user.getIncidencias().isEmpty()){
+                    String incidencias = "";
+                    String [] aux = user.getIncidencias().split(",");
+                    for (String s : aux) {
+                        if (!s.equals(key)) {
+                            incidencias += s + ",";
+                        } else {
+                            borrarIncidenciaStorage(s);
+                        }
+                    }
+                    if(!incidencias.isEmpty()){
+                        incidencias = incidencias.substring(0, incidencias.length() -1);
+                    }
+
+                    user.setIncidencias(incidencias);
+                    refUsuarios.child(email).setValue(user);
+                    refIncidencias.child(key).removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void borrarIncidenciaStorage(String s) {
+        storageReference = FirebaseStorage.getInstance().getReference();
+        refIncidencias.child(s).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String bucket = "incidencias/" + snapshot.child("titulo").getValue(String.class) + "_" + snapshot.child("id").getValue().toString() + ".jpg";
+                storageReference.child(bucket);
+                storageReference.delete();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

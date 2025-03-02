@@ -10,11 +10,13 @@
         android:name="com.example.proyectoad.ui.inicio.InicioFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_inicio"/>
+
     <fragment
         android:id="@+id/detail_Incidencia_Fragment"
         android:name="com.example.proyectoad.ui.creacion.Detail_Incidencia_Fragment"
         android:label="fragment_detail_incidencia"
         tools:layout="@layout/fragment_detail_incidencia"/>
+
     <fragment
         android:id="@+id/navigation_creacion"
         android:name="com.example.proyectoad.ui.creacion.FragmentCreacion"

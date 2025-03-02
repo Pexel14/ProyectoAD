@@ -89,6 +89,7 @@ public class FragmentCreacion extends Fragment {
         binding.btnGuardar.setOnClickListener(v-> {
             String titulo = binding.etCreacionTitulo.getText().toString();
             String descripcion = binding.etCreacionDescripcion.getText().toString();
+            String email = mAuth.getCurrentUser().getEmail();
 
             if(!titulo.isEmpty()){
                 if(!descripcion.isEmpty()){
@@ -105,7 +106,8 @@ public class FragmentCreacion extends Fragment {
                                         descripcion,
                                         "",
                                         url,
-                                        "Sin Revisar"
+                                        "Sin Revisar",
+                                        email
                             );
                             incidenciasReference.child(String.valueOf(idIncidencia)).setValue(incidencia).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -155,7 +157,7 @@ public class FragmentCreacion extends Fragment {
                         snapshot.child("foto_perfil").getValue(String.class),
                         snapshot.child("es_admin").getValue(Boolean.class)
                 );
-                if(user.getIncidencias().isEmpty()){
+                if(user.getIncidencias().isEmpty() || user.getIncidencias() == null){
                     user.setIncidencias(String.valueOf(idIncidencia));
                 } else {
                     user.setIncidencias(user.getIncidencias() + "," + idIncidencia);

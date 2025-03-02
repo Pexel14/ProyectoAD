@@ -41,4 +41,26 @@
     <string name="introduce_tus_apellidos">Introduce tus apellidos</string>
     <string name="apellidos">Apellidos</string>
     <string name="ya_casi_estas_rellena_el_formulario_de_registro_n_para_entrar_a_la_app">Ya casi estas, rellena el formulario de registro \n para entrar a la App</string>
+    <string name="fragment_incidencias_confirmacion_eliminar">Confirmación eliminar</string>
+    <string name="fragment_incidencias_mensaje_eliminar">¿Estás seguro de eliminar la incidencia?</string>
+    <string name="fragment_incidencias_confirmacion">Si</string>
+    <string name="fragment_incidencias_incidencia_eliminada">Incidencia eliminada</string>
+    <string name="fragment_incidencias_fallo_eliminacion">Error al eliminar la incidencia</string>
+    <string name="fragment_incidencias_incidencia_rechazo">No</string>
+    <string name="detail_incidencia_fragment_sin_revisar">Sin revisar</string>
+    <string name="detail_incidencia_fragment_en_revision">En revision</string>
+    <string name="detail_incidencia_fragment_completado">Completado</string>
+    <string name="fragment_detail_modificar_incidencia">Modificar Incidencia</string>
+    <string name="fragment_inicio_sin_incidencias">No hay incidencias registradas</string>
+    <string name="inicio_adapter_error_eliminar">Ha ocurrido un error al borrar la incidencia</string>
+    <string name="inicio_adapter_exito_eliminar">Incidencia eliminada con éxito</string>
+    <string name="inicio_adapter_titulo_alerta">Confirmar Eliminar</string>
+    <string name="inicio_adapter_mensaje_alerta">¿Estás seguro de eliminar la incidencia?</string>
+    <string name="inicio_adapter_confirmacion">Si</string>
+    <string name="inicio_adapter_denegacion">No</string>
+    <string name="detail_incidencia_titulo_alert">Confirmación Modificar</string>
+    <string name="detail_incidencia_texto_alert">¿Guardar cambios?</string>
+    <string name="detail_incidencia_error_modificar">Ha ocurrido un error al guardar los cambios</string>
+    <string name="detail_incidencia_exito_modificar">Se han guardado los cambios</string>
+    <string name="inicio_adapter_compartir_incidencia">¡Hay un problema en la comunidad!\nDescripción: \"$1%s\"\n</string>
 </resources>
